@@ -36,10 +36,32 @@ const test2 = new Promise( (resolve, reject) => {
     
     });
 
-test2
+
+    const test3 = new Promise( (resolve, reject) => {
+
+        if ('one' == 'one'){
+            /* multiple responses */
+            resolve({
+                you: "number one",
+                others: "numbers two"
+              });
+        
+        }else{
+        
+            reject('An error has occurred');
+        
+        }
+        
+        });
+
+
+test
 .then((success) => {console.log(success)})
-/* .catch((err) => console.error(err)) if catch continuous although exist an error*/
-.then(() => test)
+ .catch((err) => console.error(err))
+ .then(() => test2)
 .then((success) => {console.log(success)})
+ .catch((err) => console.error(err)) 
+.then(() => test3)
+.then((value) => {console.log(value.you)})
 .catch((err) => console.error(err))
 ```
